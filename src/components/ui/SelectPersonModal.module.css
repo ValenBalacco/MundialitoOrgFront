@@ -1,0 +1,141 @@
+.extraInfo {
+  color: #555;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-left: 6px;
+}
+
+/* === Fondo general del modal === */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 150, 136, 0.12);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 150, 136, 0.2);
+  padding: 2rem 2.5rem;
+  min-width: 420px;
+  max-width: 540px;
+  width: 100%;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal h3 {
+  color: #00796b;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 1.5rem 0;
+  padding-right: 1rem;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0.6rem;
+  border-bottom: 1px solid #e0f7fa;
+}
+
+.listItem:hover {
+  background: #f1fefc;
+  border-radius: 8px;
+}
+
+.inTeamLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1b5e20;
+  background-color: #e8f5e9;
+  padding: 0.25rem 0.7rem;
+  border-radius: 10px;
+}
+
+.addBtn,
+.removeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+}
+
+.addBtn {
+  color: #009688;
+}
+
+.addBtn:hover {
+  background-color: #e0f2f1;
+  transform: scale(1.1);
+}
+
+.removeBtn {
+  color: #e53935;
+}
+
+.removeBtn:hover {
+  background-color: #ffebee;
+  transform: scale(1.1);
+}
+
+.actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.actions button {
+  padding: 0.85rem 1.3rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.actions button:first-of-type {
+  background: linear-gradient(135deg, #009688, #00bfa5);
+  color: #fff;
+}
+
+.actions button:first-of-type:hover {
+  background: linear-gradient(135deg, #00897b, #009688);
+}
+
+.actions button:last-of-type {
+  background: #f1fefc;
+  color: #00796b;
+  border: 1px solid #b2dfdb;
+}
+
+.actions button:last-of-type:hover {
+  background: #e0f2f1;
+}

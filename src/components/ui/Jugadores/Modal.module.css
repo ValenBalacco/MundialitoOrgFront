@@ -1,0 +1,257 @@
+/* ================= OVERLAY ================= */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.65);
+  backdrop-filter: blur(12px) saturate(180%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* ================= MODAL WINDOW ================= */
+.modal {
+  background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  color: #000000; /* texto negro */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  border: 1px solid rgba(229, 231, 235, 0.6);
+}
+
+/* ================= TITLE ================= */
+.title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  text-align: center;
+  color: #000000; /* título negro */
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.8rem;
+  letter-spacing: -0.02em;
+}
+
+/* ================= CLOSE ICON ================= */
+.closeIcon {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: transparent;
+  border: none;
+  color: #000000; /* icono negro */
+  font-size: 1.6rem;
+  cursor: pointer;
+  
+}
+
+.closeIcon:hover {
+  color: #1f2937;
+  
+}
+
+
+/* ================= FORM ================= */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+/* ================= INPUTS & LABELS ================= */
+.field {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 45%;
+}
+
+.field label {
+  font-weight: 600;
+  color: #000000; /* etiquetas negras */
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+
+.field input,
+.field select {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #000000; /* texto negro */
+  transition: all 0.2s ease;
+}
+
+.field input::placeholder {
+  color: #4b5563; /* placeholder gris oscuro */
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  color: #000000;
+}
+
+/* ================= FILE UPLOAD ================= */
+.fotoField {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 100%;
+}
+
+.fotoLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #f3f4f6;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 1rem;
+  color: #000000; /* texto negro */
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.fotoLabel:hover {
+  background: #e5e7eb;
+  border-color: #3b82f6;
+  color: #1d4ed8;
+}
+
+.fotoInput {
+  display: none;
+}
+
+.fotoPreview {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.fotoPreview:hover {
+  transform: scale(1.03);
+}
+
+/* ================= BUTTONS ================= */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cancelBtn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  font-weight: 600;
+  cursor: pointer;
+  color: #000000;
+  transition: all 0.2s ease;
+}
+
+.cancelBtn:hover {
+  background: #e5e7eb;
+}
+
+.saveBtn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.saveBtn:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ================= CHECKBOX ================= */
+.switchField label {
+  font-weight: 600;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.switchField input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #2563eb;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 600px) {
+  .modal {
+    width: 95%;
+    padding: 1.8rem;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .field,
+  .fotoField {
+    min-width: 100%;
+  }
+}

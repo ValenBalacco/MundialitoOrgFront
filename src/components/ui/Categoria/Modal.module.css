@@ -1,0 +1,178 @@
+/* ================= OVERLAY ================= */
+.darkOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.65);
+  backdrop-filter: blur(12px) saturate(180%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+
+/* ================= MODAL WINDOW ================= */
+.darkModal {
+  background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  color: #000000;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(229, 231, 235, 0.6);
+}
+
+/* ================= TITLE ================= */
+.darkTitle {
+  font-size: 1.9rem;
+  font-weight: 700;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.8rem;
+  letter-spacing: -0.02em;
+}
+
+/* ================= CLOSE ICON ================= */
+.closeIcon {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: transparent;
+  border: none;
+  color: #000000;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+/* ================= FORM ================= */
+.darkForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+/* ================= INPUTS & LABELS ================= */
+.field {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 45%;
+}
+
+.field label {
+  font-weight: 600;
+  color: #000000;
+  font-size: 0.95rem;
+  margin-bottom: 0.35rem;
+}
+
+.field input,
+.field select,
+.field textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #000000;
+  transition: all 0.2s ease;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #4b5563;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  color: #000000;
+}
+
+/* ================= COLOR PICKER ================= */
+.colorPicker {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.colorPicker label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid #1976d2;
+  border-radius: 8px;
+  padding: 4px 8px;
+  background: #f5faff;
+  gap: 0.3rem;
+  font-weight: 500;
+}
+
+.colorPicker span {
+  margin-left: 6px;
+}
+
+/* ================= BUTTONS ================= */
+.darkBtn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.darkBtn:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ================= CHECKBOX ================= */
+.switchField label {
+  font-weight: 600;
+  color: #000000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.switchField input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #2563eb;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 600px) {
+  .darkModal {
+    width: 95%;
+    padding: 1.8rem;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .field {
+    min-width: 100%;
+  }
+}

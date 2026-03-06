@@ -1,0 +1,331 @@
+/* ====== LAYOUT GENERAL ====== */
+.wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f7fafc;
+  display: flex;
+}
+
+.panelContainer {
+  flex-grow: 1;
+  padding: 3rem 4rem;
+  margin-left: 80px; /* espacio para sidebar */
+  transition: margin-left 0.3s ease;
+  color: #000; /* color de texto general */
+}
+
+/* ====== HEADER ====== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.panelTitle {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #000;
+}
+
+/* ====== BOTÓN CREAR ====== */
+.createBtn {
+  padding: 1rem 1.8rem;
+  border-radius: 10px;
+  border: none;
+  background-color: #3182ce;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.createBtn:hover {
+  background-color: #2b6cb0;
+}
+
+/* ====== TABLA PRINCIPAL ====== */
+.tableContainer {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.equipoTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: #000;
+}
+
+.equipoTable th,
+.equipoTable td {
+  padding: 1.8rem;
+  text-align: left;
+  font-size: 1.05rem;
+  color: #000;
+}
+
+.equipoTable th {
+  background-color: #f7fafc;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: #000;
+}
+
+.equipoTable tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* ====== INFO EQUIPO ====== */
+.equipoInfo {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  color: #000;
+}
+
+.categoriaBadge {
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #000;
+  background-color: #e2e8f0;
+}
+
+/* ====== GRUPO DE BOTONES ====== */
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+}
+
+/* ====== BOTONES DE ACCIÓN ====== */
+.iconButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-size: 1.6rem;
+}
+
+.iconButton:hover {
+  background-color: #edf2f7;
+  transform: scale(1.15);
+}
+
+.deleteBtn {
+  color: #e53e3e;
+}
+
+.editBtn {
+  color: #38b2ac;
+}
+
+.viewBtn {
+  color: #48bb78;
+}
+
+/* ====== BOTÓN AGREGAR ====== */
+.addBtn {
+  background-color: #edf2f7;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem 1.3rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: #000;
+}
+
+.addBtn:hover {
+  background-color: #e2e8f0;
+}
+
+/* ====== MODAL CARNET ====== */
+.carnetOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.carnetModal {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+  color: #000;
+}
+
+/* ====== ENCABEZADO DEL MODAL ====== */
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.modalHeader h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.closeBtn:hover {
+  color: #2d3748;
+}
+
+/* ====== CONTENIDO DEL MODAL ====== */
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  color: #000;
+}
+
+.modalSection h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.6rem;
+}
+
+/* ====== DATOS ====== */
+.modalDatosGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.2rem;
+}
+
+.modalDatoLabel {
+  font-weight: 600;
+  color: #000;
+  font-size: 1rem;
+}
+
+.modalDatoValue {
+  color: #000;
+  font-size: 1.05rem;
+}
+
+/* ====== FOTOS ====== */
+.modalFotosRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.2rem;
+  }
+  
+  .modalFotoImg {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #e2e8f0;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .modalFotoImg:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .modalFotoPlaceholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #f7fafc;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #a0aec0;
+    font-size: 1rem;
+    border: 2px dashed #e2e8f0;
+  }
+
+/* ====== TABLA EN MODAL ====== */
+.modalTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: #000;
+}
+
+.modalTable th,
+.modalTable td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 1rem;
+  color: #000;
+}
+
+.modalTable th {
+  background-color: #f7fafc;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #000;
+}
+
+.modalTableEmpty {
+  text-align: center;
+  color: #000;
+  padding: 2rem;
+  font-size: 1.1rem;
+}
+
+.tableFotoImg {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.tableFotoImg:hover {
+  transform: scale(1.1);
+}
+
+.tableFotoPlaceholder {
+  width: 50px;
+  height: 50px;
+  background-color: #f7fafc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a0aec0;
+  font-size: 0.7rem;
+  text-align: center;
+  border: 2px dashed #e2e8f0;
+}

@@ -1,0 +1,257 @@
+/* ====== LAYOUT GENERAL ====== */
+.wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f7fafc;
+  display: flex;
+  color: #000; /* Letras negras */
+}
+
+.panelContainer {
+  flex-grow: 1;
+  padding: 3rem 4rem;
+  margin-left: 80px; /* espacio para sidebar */
+  transition: margin-left 0.3s ease;
+}
+
+/* ====== HEADER ====== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.panelTitle {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #000;
+}
+
+/* ====== BOTÓN CREAR ====== */
+.createBtn {
+  padding: 1rem 1.8rem;
+  border-radius: 10px;
+  border: none;
+  background-color: #3182ce;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.createBtn:hover {
+  background-color: #2b6cb0;
+  transform: translateY(-2px);
+}
+
+/* ====== TABLA PRINCIPAL ====== */
+.tableContainer {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.categoriaTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.categoriaTable th,
+.categoriaTable td {
+  padding: 1rem;
+  text-align: left;
+  font-size: 1rem;
+  color: #000;
+}
+
+.categoriaTable th {
+  background-color: #f7fafc;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+}
+
+.categoriaTable tbody tr:hover {
+  background-color: #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+/* ====== BADGE ====== */
+.categoriaBadge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05) inset;
+}
+
+/* ====== BOTONES DE ACCIÓN ====== */
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.iconButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.iconButton:hover {
+  background-color: #edf2f7;
+  transform: scale(1.1);
+}
+
+.deleteBtn {
+  color: #e53e3e;
+}
+
+.editBtn {
+  color: #38b2ac;
+}
+
+.viewBtn {
+  color: #48bb78;
+}
+
+/* ====== ACCIONES EN CELDA ====== */
+.actionsHeader {
+  text-align: right;
+}
+
+.actionsCell {
+  text-align: right;
+}
+
+/* ====== MODAL CARNET ====== */
+.carnetOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.carnetModal {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+  color: #000;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: slideUp 0.4s ease forwards;
+}
+
+/* ====== ANIMACIONES ====== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ====== ENCABEZADO DEL MODAL ====== */
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #edf2f7;
+  padding-bottom: 0.8rem;
+}
+
+.modalHeader h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #000;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.closeBtn:hover {
+  color: #2d3748;
+  transform: scale(1.1);
+}
+
+/* ====== CONTENIDO DEL MODAL ====== */
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.modalSection h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+/* ====== DATOS ====== */
+.modalDatosGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+}
+
+.modalDatoLabel {
+  font-weight: 600;
+}
+
+.modalDatoValue {
+  font-size: 1rem;
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 0.4rem 0.6rem;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .panelContainer {
+    padding: 2rem;
+  }
+
+  .createBtn {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .modalDatosGrid {
+    grid-template-columns: 1fr;
+  }
+}
