@@ -90,7 +90,7 @@ const EquiposScreen = () => {
     }
   };
 
-  // 🧠 Función para determinar color de texto según fondo
+  //  Función para determinar color de texto según fondo
   const getContrastingTextColor = (bgColor: string) => {
     if (!bgColor) return '#000';
     const color = bgColor.charAt(0) === '#' ? bgColor.substring(1) : bgColor;

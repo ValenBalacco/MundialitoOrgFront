@@ -44,7 +44,13 @@ const IngresarClubesModal = ({ open, onClose }: Props) => {
         <div className={styles.clubGrid}>
           {clubes.map(c => (
             <div key={c.cod} className={styles.clubCard} onClick={() => handleSelectClub(c)}>
-              <div className={styles.clubIcon}><FaBuilding /></div>
+              <div className={styles.clubIcon}>
+                {c.escudo ? (
+                  <img src={c.escudo} alt={`Escudo de ${c.nombre}`} />
+                ) : (
+                  <FaBuilding />
+                )}
+              </div>
               <div className={styles.clubName}>{c.nombre}</div>
               <div className={styles.clubLocalidad}>{c.localidad}</div>
             </div>

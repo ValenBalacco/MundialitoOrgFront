@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './SlideBoard.module.css';
-import { FaUsers, FaUserShield, FaLayerGroup, FaRunning, FaArrowLeft } from 'react-icons/fa';
+import { FaUsers, FaUserShield, FaLayerGroup, FaRunning, FaArrowLeft, FaCalendarAlt } from 'react-icons/fa';
 
 const SlideBoard = () => {
   const navigate = useNavigate();
@@ -10,7 +10,8 @@ const SlideBoard = () => {
     { path: '/club/equipos', label: 'Equipos', icon: <FaUsers /> },
     { path: '/club/staff', label: 'Staff', icon: <FaUserShield /> },
     { path: '/club/categorias', label: 'Categorías', icon: <FaLayerGroup /> },
-    { path: '/club/jugadores', label: 'Jugadores', icon: <FaRunning /> }
+    { path: '/club/jugadores', label: 'Jugadores', icon: <FaRunning /> },
+    { path: '/club/eventos', label: 'Mis Eventos', icon: <FaCalendarAlt /> }
   ];
 
   return (
@@ -18,7 +19,7 @@ const SlideBoard = () => {
       {buttons.map(btn => (
         <button
           key={btn.path}
-          className={location.pathname === btn.path ? styles.active : ''}
+          className={location.pathname.startsWith(btn.path) ? styles.active : ''}
           onClick={() => navigate(btn.path)}
           title={btn.label}
         >

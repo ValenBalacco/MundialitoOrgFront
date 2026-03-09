@@ -1,71 +1,128 @@
-.container {
-    padding: 2rem;
-    background-color: #f4f7f6;
+.wrapper {
+    min-height: 100vh;
+    width: 100%;
+    background-color: #f7fafc;
+    display: flex;
+    color: #000;
 }
 
-h1 {
+.panelContainer {
+    flex-grow: 1;
+    padding: 3rem 4rem;
+    margin-left: 80px; /* Space for SlideBoard */
+    transition: margin-left 0.3s ease;
+}
+
+.panelTitle {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
 }
 
-.eventosList {
+.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2rem;
 }
 
-.eventoCard {
-    background: white;
+.card {
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.eventoCard h2 {
-    margin-top: 0;
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
-.eventoCard select {
-    width: calc(100% - 100px);
-    padding: 0.5rem;
-    margin-right: 1rem;
+.cardTitle {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 1rem;
 }
 
-.eventoCard button {
-    width: 90px;
-    padding: 0.5rem;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
+.inscripcionSection {
+    margin-bottom: 1.5rem;
+}
+
+.equipoSelect {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 1rem;
+    background-color: #f8f9fa;
+    color: #333;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.eventoCard button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+.equipoSelect:hover {
+    border-color: #888;
 }
 
 .equiposInscritos {
-    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
 }
 
 .equiposInscritos h3 {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #555;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .equiposInscritos ul {
     list-style: none;
     padding: 0;
-    margin-top: 1rem;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
 }
 
 .equiposInscritos li {
-    background-color: #f8f9fa;
-    padding: 0.5rem;
-    border-radius: 4px;
+    background-color: #eef2f7;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
     margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.buttonGroup {
+    display: flex;
+    margin-top: auto; /* Pushes button to the bottom */
+}
+
+.viewBtn {
+    flex: 1;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    color: white;
+    box-shadow: 0 4px 15px rgba(33, 147, 176, 0.2);
+}
+
+.viewBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(33, 147, 176, 0.3);
 }

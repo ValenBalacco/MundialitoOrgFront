@@ -1,97 +1,150 @@
 .container {
     padding: 2rem;
-    background-color: #f4f7f6;
+    background: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
 .header h1 {
-    color: #333;
+    color: #1a2533;
+    font-size: 2.8rem;
+    font-weight: 700;
+}
+
+.backBtn, .createBtn {
+    color: white;
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+}
+
+.backBtn {
+    background: #6c757d;
+    color: white;
 }
 
 .createBtn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
+    background: linear-gradient(45deg, #2196F3 30%, #21CBF3 90%);
+}
+
+.backBtn:hover, .createBtn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.headerActions {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 2.5rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cardTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a2533;
+    margin-bottom: 2rem;
+    border-bottom: 3px solid #eee;
+    padding-bottom: 1.5rem;
+    text-align: center;
+}
+
+.cardProperties {
+    margin-bottom: 2.5rem;
+    flex-grow: 1;
+}
+
+.property {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    transition: background-color 0.3s;
-}
-
-.createBtn:hover {
-    background-color: #218838;
-}
-
-.tableContainer {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.eventTable {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.eventTable th,
-.eventTable td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.eventTable th {
-    background-color: #f8f9fa;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
     color: #333;
+}
+
+.property strong {
+    color: #1a2533;
     font-weight: 600;
 }
 
 .buttonGroup {
-    display: flex;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: auto;
 }
 
-.viewBtn,
-.editBtn,
-.deleteBtn {
+.viewBtn, .editBtn, .deleteBtn {
     border: none;
-    background: none;
+    padding: 1rem;
+    border-radius: 14px;
     cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.6rem;
+    transition: all 0.4s ease;
 }
 
 .viewBtn {
-    color: #17a2b8;
-}
-.viewBtn:hover {
-    background-color: #e2f3f5;
+    background-color: #e0f7fa;
+    color: #00796b;
 }
 
 .editBtn {
-    color: #ffc107;
-}
-.editBtn:hover {
-    background-color: #fff8e1;
+    background-color: #fffde7;
+    color: #fbc02d;
 }
 
 .deleteBtn {
-    color: #dc3545;
+    background-color: #ffebee;
+    color: #e53935;
 }
-.deleteBtn:hover {
-    background-color: #fbe_e_e;
+
+.viewBtn:hover, .editBtn:hover, .deleteBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }

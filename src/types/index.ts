@@ -18,6 +18,7 @@ export interface Clubes {
     telefonoResponsable: string;
     email: string;
     idiomaContacto: string;
+    escudo: string;
     activo: boolean;
     equipos?: Equipos[];
     staff?: Staff[];

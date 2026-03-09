@@ -11,16 +11,6 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-      '/eventos': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-        secure: false,
-      },
-      '/encuentros': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-        secure: false,
-      },
     },
   }
 })

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import type { Clubes } from '../../../types';
 import styles from './Modal.module.css';
 import { MdClose } from 'react-icons/md';
+import { uploadToCloudinary } from '../../../utils/cloudinary';
+import Swal from 'sweetalert2';
 
 interface Props {
   open: boolean;
@@ -20,6 +22,8 @@ const EditClubModal = ({ open, club, onClose, onSave }: Props) => {
   const [telefonoResponsable, setTelefonoResponsable] = useState('');
   const [idiomaContacto, setIdiomaContacto] = useState('');
   const [email, setEmail] = useState('');
+  const [escudo, setEscudo] = useState<File | null>(null);
+  const [escudoUrl, setEscudoUrl] = useState('');
   const [activo, setActivo] = useState(true);
 
   useEffect(() => {
@@ -33,6 +37,7 @@ const EditClubModal = ({ open, club, onClose, onSave }: Props) => {
       setTelefonoResponsable(club.telefonoResponsable ?? '');
       setIdiomaContacto(club.idiomaContacto ?? '');
       setEmail(club.email);
+      setEscudoUrl(club.escudo);
       setActivo(club.activo);
     }
   }, [club]);
@@ -41,6 +46,18 @@ const EditClubModal = ({ open, club, onClose, onSave }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    let newEscudoUrl = club.escudo;
+    if (escudo) {
+        try {
+            newEscudoUrl = await uploadToCloudinary(escudo);
+        } catch (error) {
+            console.error("Error uploading image", error);
+            Swal.fire('Error', 'No se pudo subir la nueva imagen del escudo.', 'error');
+            return;
+        }
+    }
+
     const updatedClub = {
       ...club,
       nombre,
@@ -52,6 +69,7 @@ const EditClubModal = ({ open, club, onClose, onSave }: Props) => {
       telefonoResponsable,
       idiomaContacto,
       email,
+      escudo: newEscudoUrl,
       activo,
     };
     await onSave(club.cod, updatedClub);
@@ -106,11 +124,20 @@ const EditClubModal = ({ open, club, onClose, onSave }: Props) => {
               <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
             </div>
           </div>
-          <div className={styles.field}>
-            <label>Idioma de Contacto</label>
-            <input value={idiomaContacto} onChange={e => setIdiomaContacto(e.target.value)} />
+          <div className={styles.row}>
+            <div className={styles.field}>
+                <label>Idioma de Contacto</label>
+                <input value={idiomaContacto} onChange={e => setIdiomaContacto(e.target.value)} />
+            </div>
+            <div className={styles.field}>
+                <label>Cambiar Escudo</label>
+                <input type="file" onChange={e => setEscudo(e.target.files ? e.target.files[0] : null)} />
+            </div>
           </div>
           <div className={styles.row}>
+            <div className={styles.field}>
+                {escudoUrl && <img src={escudoUrl} alt="Escudo del club" style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px', marginTop: '1rem' }} />}
+            </div>
             <div className={styles.field}>
               <label style={{ flexDirection: 'row', alignItems: 'center' }}>
                 Activo

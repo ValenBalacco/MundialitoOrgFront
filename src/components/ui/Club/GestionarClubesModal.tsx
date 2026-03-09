@@ -86,6 +86,7 @@ const GestionarClubesModal = ({ open, onClose }: Props) => {
             <table className={styles.staffTable}>
               <thead>
                 <tr>
+                  <th>Escudo</th>
                   <th>Nombre</th>
                   <th>Localidad</th>
                   <th>Responsable</th>
@@ -96,6 +97,9 @@ const GestionarClubesModal = ({ open, onClose }: Props) => {
               <tbody>
                 {clubes.map(club => (
                   <tr key={club.cod}>
+                    <td>
+                      {club.escudo && <img src={club.escudo} alt={`Escudo de ${club.nombre}`} style={{ width: '40px', height: '40px', objectFit: 'contain' }} />}
+                    </td>
                     <td className={styles.staffName}>{club.nombre}</td>
                     <td>{club.localidad}</td>
                     <td>{club.responsable}</td>
@@ -138,7 +142,10 @@ const GestionarClubesModal = ({ open, onClose }: Props) => {
             <button className={styles.closeIcon} onClick={() => setSelectedClub(null)}>
               <MdClose size={28} />
             </button>
-            <h3 className={styles.darkTitle}>{selectedClub.nombre}</h3>
+            <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem'}}>
+                {selectedClub.escudo && <img src={selectedClub.escudo} alt={`Escudo de ${selectedClub.nombre}`} style={{ width: '60px', height: '60px', objectFit: 'contain' }} />}
+                <h3 className={styles.darkTitle}>{selectedClub.nombre}</h3>
+            </div>
             <div className={styles.clubDetailsView}>
               <div className={styles.detailItem}>
                 <span className={styles.detailItemLabel}>País</span>

@@ -42,7 +42,10 @@ const ClubScreen = () => {
           <FaSignOutAlt className={styles.logoutIcon} />
         </button>
         <div className={styles.panelContainer}>
-          <h2 className={styles.panelTitle}>{clubName}</h2>
+          <div className={styles.titleContainer}>
+            {club?.escudo && <img src={club.escudo} alt={`Escudo de ${club.nombre}`} className={styles.escudo} />}
+            <h2 className={styles.panelTitle}>{clubName}</h2>
+          </div>
           <div className={styles.grid}>
             <div className={styles.card} onClick={() => navigate('/club/staff')}>
               <FaUserShield className={`${styles.icon} ${styles.iconStaff}`} />

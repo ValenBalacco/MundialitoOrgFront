@@ -1,13 +1,16 @@
-
 import { useEffect, useState } from 'react';
 import { Evento, getEventos, deleteEvento } from '../../../api/eventosService';
 import styles from './EventosScreen.module.css';
-import { MdEdit, MdDelete, MdAdd, MdVisibility } from 'react-icons/md';
+import { MdEdit, MdDelete, MdAdd, MdVisibility, MdShuffle, MdSportsSoccer, MdArrowBack } from 'react-icons/md';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import CreateEditEventoModal from './CreateEditEventoModal';
 
 const EventosScreen = () => {
   const [eventos, setEventos] = useState<Evento[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [selectedEvento, setSelectedEvento] = useState<Evento | null>(null);
   const navigate = useNavigate();
 
   const fetchEventos = async () => {
@@ -51,51 +54,77 @@ const EventosScreen = () => {
     navigate(`/eventos/ver/${id}`);
   };
 
+  const handleOpenCreateModal = () => {
+    setIsEditMode(false);
+    setSelectedEvento(null);
+    setIsModalOpen(true);
+  };
+
+  const handleOpenEditModal = (evento: Evento) => {
+    setIsEditMode(true);
+    setSelectedEvento(evento);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleSave = () => {
+    fetchEventos();
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Gestión de Eventos</h1>
-        <button className={styles.createBtn} onClick={() => navigate('/eventos/crear')}>
-          <MdAdd size={20} />
-          Crear Nuevo Evento
+        <button className={styles.backBtn} onClick={() => navigate('/admin')}>
+            <MdArrowBack size={24} />
+            Volver
         </button>
+        <h1>Gestión de Eventos</h1>
+        <div className={styles.headerActions}>
+            <button className={styles.createBtn} onClick={handleOpenCreateModal}>
+              <MdAdd size={24} />
+              Crear Nuevo Evento
+            </button>
+        </div>
       </div>
-      <div className={styles.tableContainer}>
-        <table className={styles.eventTable}>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Tipo</th>
-              <th>Orden Encuentros</th>
-              <th>Fases</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {eventos.map(evento => (
-              <tr key={evento.id}>
-                <td>{evento.nombre}</td>
-                <td>{evento.tipo}</td>
-                <td>{evento.ordenEncuentros}</td>
-                <td>{evento.fases}</td>
-                <td>
-                  <div className={styles.buttonGroup}>
-                    <button className={styles.viewBtn} onClick={() => handleViewDetails(evento.id)} title="Ver Detalles">
-                        <MdVisibility size={20} />
-                    </button>
-                    <button className={styles.editBtn} onClick={() => navigate(`/eventos/editar/${evento.id}`)} title="Editar">
-                      <MdEdit size={20} />
-                    </button>
-                    <button className={styles.deleteBtn} onClick={() => handleDelete(evento.id)} title="Eliminar">
-                      <MdDelete size={20} />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className={styles.grid}>
+        {eventos.map(evento => (
+          <div key={evento.id} className={styles.card}>
+            <h2 className={styles.cardTitle}>{evento.nombre}</h2>
+            <div className={styles.cardProperties}>
+              <div className={styles.property}>
+                <MdSportsSoccer size={28}/>
+                <strong>Tipo:</strong> {evento.tipo}
+              </div>
+              <div className={styles.property}>
+                <MdShuffle size={28}/>
+                <strong>Orden de Encuentros:</strong> {evento.ordenEncuentros === 'AZAR' ? 'Al azar' : 'Manual'}
+              </div>
+
+            </div>
+            <div className={styles.buttonGroup}>
+              <button className={styles.viewBtn} onClick={() => handleViewDetails(evento.id)} title="Ver Detalles">
+                  <MdVisibility size={22} /> Ver
+              </button>
+              <button className={styles.editBtn} onClick={() => handleOpenEditModal(evento)} title="Editar">
+                <MdEdit size={22} /> Editar
+              </button>
+              <button className={styles.deleteBtn} onClick={() => handleDelete(evento.id)} title="Eliminar">
+                <MdDelete size={22} /> Eliminar
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
+      <CreateEditEventoModal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onSave={handleSave}
+        evento={selectedEvento}
+        isEditMode={isEditMode}
+      />
     </div>
   );
 };

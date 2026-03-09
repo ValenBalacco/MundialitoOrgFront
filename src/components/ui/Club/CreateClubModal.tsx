@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Clubes } from '../../../types';
 import { createClub } from '../../../api/clubesService';
 import styles from './Modal.module.css';
+import { uploadToCloudinary } from '../../../utils/cloudinary';
+import Swal from 'sweetalert2';
 
 interface Props {
   open: boolean;
@@ -19,10 +21,23 @@ const CreateClubModal = ({ open, onClose, onCreated }: Props) => {
   const [telefonoResponsable, setTelefonoResponsable] = useState('');
   const [email, setEmail] = useState('');
   const [idiomaContacto, setIdiomaContacto] = useState('');
+  const [escudo, setEscudo] = useState<File | null>(null);
   const [activo, setActivo] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    let escudoUrl = '';
+    if (escudo) {
+        try {
+            escudoUrl = await uploadToCloudinary(escudo);
+        } catch (error) {
+            console.error("Error uploading image", error);
+            Swal.fire('Error', 'No se pudo subir la imagen del escudo.', 'error');
+            return;
+        }
+    }
+
     const nuevoClub = {
       nombre,
       pais,
@@ -33,6 +48,7 @@ const CreateClubModal = ({ open, onClose, onCreated }: Props) => {
       telefonoResponsable,
       email,
       idiomaContacto,
+      escudo: escudoUrl,
       activo
     };
     const clubCreado = await createClub(nuevoClub as any);
@@ -98,9 +114,16 @@ const CreateClubModal = ({ open, onClose, onCreated }: Props) => {
               <input value={idiomaContacto} onChange={e => setIdiomaContacto(e.target.value)} />
             </div>
             <div className={styles.field}>
-              <label>
+                <label>Escudo del Club</label>
+                <input type="file" onChange={e => setEscudo(e.target.files ? e.target.files[0] : null)} />
+            </div>
+          </div>
+          
+          <div className={styles.row}>
+            <div className={styles.field}>
+              <label style={{ flexDirection: 'row', alignItems: 'center' }}>
                 Activo
-                <input type="checkbox" checked={activo} onChange={e => setActivo(e.target.checked)} />
+                <input type="checkbox" checked={activo} onChange={e => setActivo(e.target.checked)} style={{ width: 'auto', marginLeft: '1rem' }}/>
               </label>
             </div>
           </div>

@@ -18,6 +18,7 @@ const CreateEditPartidoModal = ({ open, onClose, onSaved, evento, partido }: Pro
     const [fecha, setFecha] = useState('');
     const [fase, setFase] = useState(1);
     const [resultado, setResultado] = useState('');
+    const [estado, setEstado] = useState<'DISPUTADO' | 'POR_DISPUTAR'>('POR_DISPUTAR');
 
     const availableClubs = evento.clubes || [];
 
@@ -28,12 +29,14 @@ const CreateEditPartidoModal = ({ open, onClose, onSaved, evento, partido }: Pro
             setFecha(new Date(partido.fecha).toISOString().slice(0, 16));
             setFase(partido.fase);
             setResultado(partido.resultado);
+            setEstado(partido.estado);
         } else {
             setClubLocalId('');
             setClubVisitanteId('');
             setFecha('');
             setFase(1);
             setResultado('0-0');
+            setEstado('POR_DISPUTAR');
         }
     }, [partido, open]);
 
@@ -44,22 +47,37 @@ const CreateEditPartidoModal = ({ open, onClose, onSaved, evento, partido }: Pro
             return;
         }
 
-        const encuentroData = {
-            evento: { id: evento.id },
-            clubLocal: { cod: Number(clubLocalId) },
-            clubVisitante: { cod: Number(clubVisitanteId) },
-            fecha,
-            fase,
-            resultado,
-        };
-
         try {
             if (partido) {
-                // Assuming updateEncuentro can handle this new structure.
-                // The 'id' is passed separately as per standard REST patterns.
-                await updateEncuentro(partido.id, encuentroData);
+                const clubLocal = availableClubs.find(c => c.cod === Number(clubLocalId));
+                const clubVisitante = availableClubs.find(c => c.cod === Number(clubVisitanteId));
+
+                if (!clubLocal || !clubVisitante) {
+                    Swal.fire('Error', 'Club no encontrado.', 'error');
+                    return;
+                }
+
+                const updatedEncuentroData = {
+                    id: partido.id,
+                    evento: { id: evento.id },
+                    clubLocal,
+                    clubVisitante,
+                    fecha,
+                    fase,
+                    resultado,
+                    estado,
+                };
+                await updateEncuentro(partido.id, updatedEncuentroData);
                 Swal.fire('Actualizado', 'El partido ha sido actualizado.', 'success');
             } else {
+                const encuentroData = {
+                    evento: { id: evento.id },
+                    clubLocal: { cod: Number(clubLocalId) },
+                    clubVisitante: { cod: Number(clubVisitanteId) },
+                    fecha,
+                    fase,
+                    resultado,
+                };
                 await createEncuentro(encuentroData);
                 Swal.fire('Creado', 'El partido ha sido creado.', 'success');
             }
@@ -106,8 +124,15 @@ const CreateEditPartidoModal = ({ open, onClose, onSaved, evento, partido }: Pro
                         <input type="number" value={fase} onChange={e => setFase(Number(e.target.value))} min="1" required />
                     </div>
                     <div className={styles.formGroup}>
+                        <label>Estado</label>
+                        <select value={estado} onChange={e => setEstado(e.target.value as 'DISPUTADO' | 'POR_DISPUTAR')}>
+                            <option value="POR_DISPUTAR">Por Disputar</option>
+                            <option value="DISPUTADO">Disputado</option>
+                        </select>
+                    </div>
+                    <div className={styles.formGroup}>
                         <label>Resultado</label>
-                        <input type="text" value={resultado} onChange={e => setResultado(e.target.value)} />
+                        <input type="text" value={resultado} onChange={e => setResultado(e.target.value)} disabled={estado === 'POR_DISPUTAR'} />
                     </div>
                     <div className={styles.buttonGroup}>
                         <button type="submit" className={styles.saveBtn}>Guardar</button>

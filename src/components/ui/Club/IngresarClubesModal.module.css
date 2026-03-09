@@ -74,6 +74,14 @@
     color: #007bff;
   }
   
+  .clubIcon img {
+    width: 100%;
+    height: 100%;
+    max-width: 48px;
+    max-height: 48px;
+    object-fit: contain;
+  }
+
   .clubName {
     font-size: 1.2rem;
     font-weight: 600;

@@ -23,7 +23,7 @@ axiosAuth.interceptors.request.use(
 export interface Evento {
   id: number;
   nombre: string;
-  tipo: 'LLAVES' | 'PUNTOS' | 'MIXTO';
+  tipo: 'LLAVES' | 'PUNTOS';
   ordenEncuentros: 'AZAR' | 'MANUAL';
   fases: number;
   clubes?: Clubes[];
@@ -93,4 +93,10 @@ export const addEquipoToEvento = async (eventoId: number, equipoId: number): Pro
 
 export const removeEquipoFromEvento = async (eventoId: number, equipoId: number): Promise<void> => {
   await axiosAuth.delete(`${API_URL}/${eventoId}/equipos/${equipoId}`);
+};
+
+export const getEventosByClub = async (clubId: number): Promise<Evento[]> => {
+  const clubesApiUrl = import.meta.env.VITE_API_CLUBES_URL;
+  const response = await axiosAuth.get(`${clubesApiUrl}/${clubId}/eventos`);
+  return response.data;
 };

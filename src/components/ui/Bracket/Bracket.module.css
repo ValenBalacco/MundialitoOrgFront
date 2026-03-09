@@ -1,0 +1,114 @@
+
+.bracket {
+    display: flex;
+    overflow-x: auto;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+}
+
+.round {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-shrink: 0;
+    margin-right: 4rem; /* Space between rounds */
+}
+
+.roundTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.matches {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* Space between matches in a round */
+}
+
+.match {
+    position: relative;
+}
+
+.matchContent {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    width: 200px; /* Width of a match box */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.team {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.team:last-child {
+    border-bottom: none;
+}
+
+.teamName {
+    font-weight: 500;
+    color: #555;
+}
+
+.score {
+    font-weight: 700;
+    color: #333;
+}
+
+.winner .teamName,
+.winner .score {
+    font-weight: 700;
+    color: #28a745;
+}
+
+/* --- Bracket Lines --- */
+
+/* Horizontal line coming out of a match */
+.match::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -2rem; /* Half of the margin-right of .round */
+    width: 2rem; /* Half of the margin-right of .round */
+    height: 2px;
+    background-color: #adb5bd;
+}
+
+/* Vertical line connecting two matches */
+.match:not(:nth-child(odd))::before {
+    content: '';
+    position: absolute;
+    top: -1.25rem; /* Half of gap of .matches */
+    right: -2rem; /* Half of the margin-right of .round */
+    width: 2px;
+    height: calc(100% + 2.5rem); /* 100% of match height + gap */
+    background-color: #adb5bd;
+    transform: translateY(-50%);
+}
+
+/* Hide line for last match in a round if it's odd */
+.match:last-child:nth-child(odd)::after {
+    display: none;
+}
+
+/* Don't draw lines out of the final winner's box */
+.round:last-child .match::after,
+.round:last-child .match::before {
+    display: none;
+}
+
+.noData {
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+}

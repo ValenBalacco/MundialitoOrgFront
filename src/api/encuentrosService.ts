@@ -27,6 +27,7 @@ export interface Encuentro {
   fase: number;
   resultado: string;
   evento: { id: number };
+  estado: 'DISPUTADO' | 'POR_DISPUTAR';
 }
 
 // Payload for creating a new encounter
@@ -40,7 +41,7 @@ export type CreateEncuentroPayload = {
 };
 
 // Payload for updating an existing encounter
-export type UpdateEncuentroPayload = Partial<CreateEncuentroPayload>;
+export type UpdateEncuentroPayload = Partial<Encuentro>;
 
 
 export const getEncuentros = async (eventoId?: number): Promise<Encuentro[]> => {
