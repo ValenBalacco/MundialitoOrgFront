@@ -47,7 +47,7 @@ export async function deleteJugador(id: number): Promise<Jugador> {
 }
 
 export async function setJugadorActivo(id: number, activo: boolean): Promise<Jugador | null> {
-    const response = await axiosAuth.put(`${API_URL}/${id}/activo?activo=${activo}`);
+    const response = await axiosAuth.put(`${API_URL}/${id}/activo?activo=${activo}`, {});
     return response.data;
 }
 
@@ -55,3 +55,12 @@ export async function getJugadoresByClub(clubId: number): Promise<Jugador[]> {
     const response = await axiosAuth.get(`${API_URL}?clubId=${clubId}`);
     return response.data;
 }
+
+export const getJugadoresInactivos = async (clubId?: number): Promise<Jugador[]> => {
+  let url = `${API_URL}/inactivos`;
+  if (clubId) {
+    url += `?clubId=${clubId}`;
+  }
+  const response = await axiosAuth.get(url);
+  return response.data;
+};

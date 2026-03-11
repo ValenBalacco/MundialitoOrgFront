@@ -41,7 +41,7 @@ const EventosScreen = () => {
     if (result.isConfirmed) {
       try {
         await deleteEvento(id);
-        fetchEventos();
+        setEventos(prev => prev.filter(e => e.id !== id));
         Swal.fire('Eliminado', 'El evento ha sido eliminado.', 'success');
       } catch (error) {
         console.error("Error deleting event", error);
@@ -90,7 +90,7 @@ const EventosScreen = () => {
         </div>
       </div>
       <div className={styles.grid}>
-        {eventos.map(evento => (
+        {eventos.filter(e => e.activo).map(evento => (
           <div key={evento.id} className={styles.card}>
             <h2 className={styles.cardTitle}>{evento.nombre}</h2>
             <div className={styles.cardProperties}>

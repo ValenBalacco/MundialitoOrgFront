@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Jugador } from '../../../types';
 import { createJugador } from '../../../api/jugadorService';
 import styles from './Modal.module.css';
@@ -15,12 +15,52 @@ const CreateJugadorModal = ({ open, onClose, onCreated }: Props) => {
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [fechaNacimiento, setFechaNacimiento] = useState('');
+  const [lugarNacimiento, setLugarNacimiento] = useState('');
+  const [nacionalidad, setNacionalidad] = useState('');
   const [numeroDocumento, setNumeroDocumento] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [email, setEmail] = useState('');
   const [numeroCamiseta, setNumeroCamiseta] = useState('');
   const [demarcacion, setDemarcacion] = useState('');
+  const [altura, setAltura] = useState('');
+  const [peso, setPeso] = useState('');
+  const [pieDominante, setPieDominante] = useState('');
+  const [observaciones, setObservaciones] = useState('');
   const [foto, setFoto] = useState('');
   const [uploading, setUploading] = useState(false);
   const [activo] = useState(true);
+
+  useEffect(() => {
+    if (open) {
+      setNombre('');
+      setApellido('');
+      setFechaNacimiento('');
+      setLugarNacimiento('');
+      setNacionalidad('');
+      setNumeroDocumento('');
+      setTelefono('');
+      setEmail('');
+      setNumeroCamiseta('');
+      setDemarcacion('');
+      setAltura('');
+      setPeso('');
+      setPieDominante('');
+      setObservaciones('');
+      setFoto('');
+    }
+  }, [open]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            onClose();
+        }
+    };
+    if (open) {
+        window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open, onClose]);
 
   if (!open) return null;
 
@@ -42,13 +82,21 @@ const CreateJugadorModal = ({ open, onClose, onCreated }: Props) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const clubId = localStorage.getItem('clubId');
-    const nombreCompleto = `${nombre} ${apellido}`.trim();
     const nuevoJugador = {
-      nombre: nombreCompleto,
+      nombre,
+      apellido,
       fechaNacimiento,
+      lugarNacimiento,
+      nacionalidad,
       numeroDocumento,
+      telefono,
+      email,
       numeroCamiseta: numeroCamiseta ? Number(numeroCamiseta) : undefined,
       demarcacion,
+      altura: altura ? Number(altura) : undefined,
+      peso: peso ? Number(peso) : undefined,
+      pieDominante,
+      observaciones,
       foto,
       activo,
       goles: 0,
@@ -63,9 +111,17 @@ const CreateJugadorModal = ({ open, onClose, onCreated }: Props) => {
     onClose();
   };
 
+  const isFormInvalid =
+    !nombre.trim() ||
+    !apellido.trim() ||
+    !fechaNacimiento.trim() ||
+    !numeroDocumento.trim() ||
+    !numeroCamiseta.trim() ||
+    !demarcacion.trim();
+
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button className={styles.closeIcon} onClick={onClose}>
           <MdClose size={28} />
         </button>
@@ -75,36 +131,83 @@ const CreateJugadorModal = ({ open, onClose, onCreated }: Props) => {
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.row}>
             <div className={styles.field}>
-              <label>Nombre</label>
+              <label>Nombre <span className={styles.required}>*</span></label>
               <input value={nombre} onChange={(e) => setNombre(e.target.value)} required />
             </div>
             <div className={styles.field}>
-              <label>Apellido</label>
+              <label>Apellido <span className={styles.required}>*</span></label>
               <input value={apellido} onChange={(e) => setApellido(e.target.value)} required />
             </div>
           </div>
 
           <div className={styles.row}>
             <div className={styles.field}>
-              <label>Fecha de nacimiento</label>
-              <input type="date" value={fechaNacimiento} onChange={(e) => setFechaNacimiento(e.target.value)} required />
+              <label>Nro de Documento <span className={styles.required}>*</span></label>
+              <input value={numeroDocumento} onChange={(e) => setNumeroDocumento(e.target.value)} required />
             </div>
             <div className={styles.field}>
-              <label>Número de camiseta</label>
+              <label>Fecha de Nacimiento <span className={styles.required}>*</span></label>
+              <input type="date" value={fechaNacimiento} onChange={(e) => setFechaNacimiento(e.target.value)} required />
+            </div>
+          </div>
+
+          <div className={styles.row}>
+            <div className={styles.field}>
+              <label>Lugar de Nacimiento</label>
+              <input value={lugarNacimiento} onChange={(e) => setLugarNacimiento(e.target.value)} />
+            </div>
+            <div className={styles.field}>
+              <label>Nacionalidad</label>
+              <input value={nacionalidad} onChange={(e) => setNacionalidad(e.target.value)} />
+            </div>
+          </div>
+
+          <div className={styles.row}>
+            <div className={styles.field}>
+              <label>Teléfono</label>
+              <input type="tel" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+            </div>
+            <div className={styles.field}>
+              <label>Email</label>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </div>
+          </div>
+
+          <div className={styles.row}>
+            <div className={styles.field}>
+              <label>Nro de Camiseta <span className={styles.required}>*</span></label>
               <input value={numeroCamiseta} onChange={(e) => setNumeroCamiseta(e.target.value)} required />
             </div>
           </div>
 
           <div className={styles.row}>
             <div className={styles.field}>
-              <label>Número de documento</label>
-              <input value={numeroDocumento} onChange={(e) => setNumeroDocumento(e.target.value)} required />
-            </div>
-            <div className={styles.field}>
-              <label>Demarcación</label>
+              <label>Demarcación <span className={styles.required}>*</span></label>
               <input value={demarcacion} onChange={(e) => setDemarcacion(e.target.value)} required />
             </div>
+            <div className={styles.field}>
+              <label>Pie Dominante</label>
+              <select value={pieDominante} onChange={(e) => setPieDominante(e.target.value)}>
+                <option value="">Seleccionar...</option>
+                <option value="Derecho">Derecho</option>
+                <option value="Izquierdo">Izquierdo</option>
+                <option value="Ambidextro">Ambidextro</option>
+              </select>
+            </div>
           </div>
+
+          <div className={styles.row}>
+            <div className={styles.field}>
+              <label>Altura (cm)</label>
+              <input type="number" value={altura} onChange={(e) => setAltura(e.target.value)} />
+            </div>
+            <div className={styles.field}>
+              <label>Peso (kg)</label>
+              <input type="number" step="0.1" value={peso} onChange={(e) => setPeso(e.target.value)} />
+            </div>
+          </div>
+
+          <textarea className={styles.textarea} placeholder="Observaciones" value={observaciones} onChange={(e) => setObservaciones(e.target.value)} />
 
           <div className={styles.fotoField}>
             <label htmlFor="fotoInput" className={styles.fotoLabel}>
@@ -125,7 +228,7 @@ const CreateJugadorModal = ({ open, onClose, onCreated }: Props) => {
             <button type="button" className={styles.cancelBtn} onClick={onClose}>
               Cancelar
             </button>
-            <button type="submit" className={styles.saveBtn} disabled={uploading}>
+            <button type="submit" className={styles.saveBtn} disabled={uploading || isFormInvalid}>
               {uploading ? 'Guardando...' : 'Crear'}
             </button>
           </div>

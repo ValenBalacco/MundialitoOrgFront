@@ -170,3 +170,26 @@
     border: 2px dashed #e2e8f0;
   }
   
+  @media (max-width: 768px) {
+    .carnetModal {
+      width: 95%;
+      padding: 1.5rem;
+    }
+  
+    .modalHeader h2 {
+      font-size: 1.6rem;
+    }
+  
+    .modalDatosGrid {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+    
+    .modalDatoLabel {
+      font-size: 0.9rem;
+      padding-bottom: 0.2rem;
+      border-bottom: 1px solid #eee;
+    }
+  }
+
+  

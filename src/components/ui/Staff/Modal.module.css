@@ -1,5 +1,5 @@
 /* ================= OVERLAY ================= */
-.darkOverlay {
+.overlay {
   position: fixed;
   inset: 0;
   background: rgba(17, 24, 39, 0.65);
@@ -8,14 +8,15 @@
   justify-content: center;
   align-items: center;
   z-index: 3000;
+  animation: fadeIn 0.3s ease forwards;
 }
 
 /* ================= MODAL WINDOW ================= */
-.darkModal {
+.modal {
   background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
   border-radius: 20px;
   padding: 2.5rem;
-  width: 600px;
+  width: 900px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
@@ -23,11 +24,12 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   border: 1px solid rgba(229, 231, 235, 0.6);
 }
 
 /* ================= TITLE ================= */
-.darkTitle {
+.title {
   font-size: 1.9rem;
   font-weight: 700;
   text-align: center;
@@ -55,7 +57,7 @@
 }
 
 /* ================= FORM ================= */
-.darkForm {
+.form {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -80,6 +82,11 @@
   color: #000000;
   font-size: 0.95rem;
   margin-bottom: 0.35rem;
+}
+
+.field label .required {
+  color: #e53e3e;
+  margin-left: 4px;
 }
 
 .field input,
@@ -156,8 +163,53 @@
   transform: scale(1.03);
 }
 
+/* ================= TEXTAREA ================= */
+.textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #000000;
+  transition: all 0.2s ease;
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  color: #000000;
+}
+
 /* ================= BUTTONS ================= */
-.darkBtn {
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cancelBtn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  font-weight: 600;
+  cursor: pointer;
+  color: #000000;
+  transition: all 0.2s ease;
+}
+
+.cancelBtn:hover {
+  background: #e5e7eb;
+}
+
+.saveBtn {
   padding: 0.75rem 1.5rem;
   background: linear-gradient(135deg, #3b82f6, #2563eb);
   color: #ffffff;
@@ -168,10 +220,18 @@
   transition: all 0.25s ease;
 }
 
-.darkBtn:hover {
+.saveBtn:hover {
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
   box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
   transform: translateY(-2px);
+}
+
+.saveBtn:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 /* ================= CHECKBOX ================= */
@@ -189,10 +249,33 @@
   accent-color: #2563eb;
 }
 
+/* ================= ANIMATIONS ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /* ================= RESPONSIVE ================= */
 @media (max-width: 600px) {
-  .darkModal {
-    width: 95%;
+  .modal {
+    width: 98%;
     padding: 1.8rem;
   }
 

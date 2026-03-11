@@ -126,3 +126,36 @@
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(33, 147, 176, 0.3);
 }
+
+@media (max-width: 768px) {
+    .panelContainer {
+        padding: 2rem 1.5rem;
+        margin-left: 0;
+        padding-bottom: 80px; /* Add padding to account for the SlideBoard */
+    }
+
+    .panelTitle {
+        font-size: 2rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    .cardTitle {
+        font-size: 1.4rem;
+    }
+
+    .equiposInscritos h3 {
+        font-size: 1rem;
+    }
+
+    .equiposInscritos li {
+        font-size: 0.9rem;
+    }
+}

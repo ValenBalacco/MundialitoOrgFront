@@ -135,13 +135,80 @@
 }
 
 /* ===== EFECTO RESPONSIVE ===== */
-@media (max-width: 900px) {
+@media (max-width: 992px) {
+  .grid {
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .card {
+    min-width: 300px;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    justify-content: flex-start;
+    padding-top: 80px; /* Espacio para el header */
+    overflow-y: auto;
+  }
+  .header {
+    padding: 1rem;
+  }
   .grid {
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    margin-top: 0;
+    width: 100%;
   }
   .card {
     width: 90%;
+    max-width: 400px;
+    min-width: unset;
+    padding: 1.5rem;
+  }
+  .iconUsuarios,
+  .iconClubes,
+  .iconEventos {
+    width: 100px;
+    height: 100px;
+  }
+  .cardTitle {
+    font-size: 1.8rem;
+  }
+  .cardBtn {
+    font-size: 1rem;
+    padding: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding-top: 70px;
+  }
+  .header {
+    padding: 0.5rem 1rem;
+  }
+  .logoutBtn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+  .card {
+    width: 95%;
+  }
+  .cardTitle {
+    font-size: 1.6rem;
+  }
+  .iconUsuarios,
+  .iconClubes,
+  .iconEventos {
+    width: 80px;
+    height: 80px;
+  }
+  .cardBtn {
+    font-size: 0.9rem;
+    padding: 0.8rem;
   }
 }

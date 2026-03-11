@@ -38,8 +38,9 @@ const ClubScreen = () => {
   return (
     <>
       <div className={styles.wrapper}>
-        <button onClick={handleLogout} className={styles.logoutButton} title="Cerrar Sesión">
+        <button onClick={handleLogout} className={styles.logoutButton}>
           <FaSignOutAlt className={styles.logoutIcon} />
+          <span className={styles.tooltip}>Cerrar Sesión</span>
         </button>
         <div className={styles.panelContainer}>
           <div className={styles.titleContainer}>

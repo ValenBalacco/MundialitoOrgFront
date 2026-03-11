@@ -139,3 +139,50 @@
 .actions button:last-of-type:hover {
   background: #e0f2f1;
 }
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.itemPhoto {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00bfa5;
+}
+
+.itemPhotoPlaceholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0f2f1;
+  border: 2px dashed #00bfa5;
+}
+
+
+@media (max-width: 768px) {
+  .modal {
+    min-width: 90vw;
+    max-width: 95vw;
+    padding: 1.5rem;
+  }
+
+  .modal h3 {
+    font-size: 1.4rem;
+  }
+
+  .list {
+    max-height: 60vh;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}

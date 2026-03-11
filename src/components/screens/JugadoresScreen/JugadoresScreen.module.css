@@ -121,22 +121,24 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  padding: 1rem;
 }
 
 .carnetModal {
-  background: #fff;
+  background: linear-gradient(145deg, #ffffff, #f0f2f5);
   border-radius: 20px;
   padding: 2rem;
   width: 90%;
-  max-width: 600px;
+  max-width: 800px;
   max-height: 90vh;
   overflow-y: auto;
   color: #000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   position: relative;
 }
 
@@ -144,12 +146,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 2rem;
 }
 
 .modalHeader h2 {
   font-size: 1.8rem;
-  font-weight: 700;
+  font-weight: 800;
   color: #000;
 }
 
@@ -168,17 +172,19 @@
 /* ====== CARNET ====== */
 .carnetHeader {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .jugadorPhoto {
   width: 120px;
   height: 120px;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 16px;
   cursor: pointer;
-  border: 2px solid #3182ce;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .jugadorPhotoPlaceholder {
@@ -194,32 +200,47 @@
 
 .jugadorInfo h3 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .jugadorInfo p {
   margin: 0.2rem 0 0;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  color: #4a5568;
 }
 
 /* ====== DETALLES ====== */
 .modalSection {
-  margin-top: 1rem;
+  margin-top: 2rem;
+}
+
+.modalSection h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
 }
 
 .modalDatosGrid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 1rem;
+  grid-template-columns: repeat(2, auto 1fr);
+  align-items: baseline;
+  column-gap: 2.5rem;
+  row-gap: 1rem;
 }
 
 .modalDatoLabel {
-  font-weight: 600;
+  font-weight: 500;
   color: #000;
 }
 
 .modalDatoValue {
   color: #000;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 /* ====== FOTO EN TABLA ====== */
@@ -249,4 +270,137 @@
   font-size: 0.7rem;
   text-align: center;
   border: 2px dashed #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .panelContainer {
+    padding: 2rem 1.5rem;
+    margin-left: 0;
+    padding-bottom: 80px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .panelTitle {
+    font-size: 2.2rem;
+  }
+
+  .createBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+  }
+
+  .jugadorTable thead {
+    display: none;
+  }
+
+  .jugadorTable tr {
+    display: block;
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    padding: 1.2rem;
+  }
+
+  .jugadorTable td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #edf2f7;
+    text-align: right;
+  }
+
+  .jugadorTable td:last-child {
+    border-bottom: none;
+  }
+
+  .jugadorTable td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #4a5568;
+    margin-right: 1rem;
+    text-align: left;
+  }
+  
+  .buttonGroup {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+  }
+  
+  .carnetModal {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .carnetHeader {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .modalDatosGrid {
+    grid-template-columns: auto 1fr;
+    column-gap: 1rem;
+    row-gap: 0.8rem;
+  }
+}
+
+.headerActions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-left: auto;
+}
+
+.toggleGroup {
+  display: flex;
+  background-color: #e2e8f0;
+  border-radius: 10px;
+  padding: 0.3rem;
+}
+
+.toggleBtn {
+  background-color: transparent;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  color: #4a5568;
+}
+
+.activeToggle {
+  background-color: #ffffff;
+  color: #2b6cb0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reactivateBtn {
+  color: #4299e1; /* Un azul para reactivar */
+}
+
+.reactivateBtn:hover {
+  background-color: #bee3f8;
+}
+
+@media (max-width: 768px) {
+  .headerActions {
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

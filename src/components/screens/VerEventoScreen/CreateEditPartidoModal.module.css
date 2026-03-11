@@ -47,6 +47,11 @@
     margin-bottom: 5px;
   }
   
+  .formGroup label .required {
+    color: #ff6b6b;
+    margin-left: 4px;
+  }
+
   .formGroup input,
   .formGroup select {
     width: 100%;
@@ -74,4 +79,17 @@
   .saveBtn:hover {
     background-color: #4cae4c;
   }
+
+  .saveBtn:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    .darkModal {
+        width: 95%;
+        padding: 20px;
+    }
+  }
+
   

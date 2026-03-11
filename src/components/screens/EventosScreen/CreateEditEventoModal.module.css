@@ -135,3 +135,46 @@
   from { transform: scale(0.95); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+@media (max-width: 768px) {
+    .modal {
+        width: 90%;
+        max-width: 500px;
+        padding: 2rem;
+    }
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .formGroup {
+        margin-bottom: 0.5rem;
+    }
+
+    .buttonGroup {
+        flex-direction: column-reverse; /* Puts primary action on bottom */
+        gap: 0.8rem;
+    }
+
+    .saveBtn,
+    .cancelBtn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+}

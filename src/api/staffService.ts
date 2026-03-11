@@ -39,13 +39,20 @@ export async function updateStaff(id: number, staff: Staff): Promise<Staff> {
     const response = await axiosAuth.put(`${API_URL}/${id}`, staff);
     return response.data;
 }
-
+export const getStaffInactivos = async (clubId?: number): Promise<Staff[]> => {
+  let url = `${API_URL}/inactivos`;
+  if (clubId) {
+    url += `?clubId=${clubId}`;
+  }
+  const response = await axiosAuth.get(url);
+  return response.data;
+};
 export async function deleteStaff(id: number): Promise<void> {
     await axiosAuth.delete(`${API_URL}/${id}`);
 }
 
 export async function setStaffActivo(id: number, activo: boolean): Promise<Staff | null> {
-    const response = await axiosAuth.put(`${API_URL}/${id}/activo?activo=${activo}`);
+    const response = await axiosAuth.put(`${API_URL}/${id}/activo?activo=${activo}`, {});
     return response.data;
 }
 

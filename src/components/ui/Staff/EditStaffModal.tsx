@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Staff } from '../../../types';
 import styles from './Modal.module.css';
+import { updateStaff } from '../../../api/staffService';
 import { MdClose, MdPhotoCamera } from 'react-icons/md';
 import { uploadToCloudinary } from '../../../utils/cloudinary';
 
@@ -8,27 +9,50 @@ interface Props {
   open: boolean;
   staff: Staff | null;
   onClose: () => void;
-  onSave: (cod: number, staff: Staff) => Promise<void>;
+  onSave: (cod: number, staff: Staff) => void;
 }
 
 const EditStaffModal = ({ open, staff, onClose, onSave }: Props) => {
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
+  const [numeroDocumento, setNumeroDocumento] = useState('');
+  const [fechaNacimiento, setFechaNacimiento] = useState('');
+  const [nacionalidad, setNacionalidad] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [email, setEmail] = useState('');
   const [cargo, setCargo] = useState('');
   const [foto, setFoto] = useState('');
+  const [observaciones, setObservaciones] = useState('');
   const [activo, setActivo] = useState(true);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (staff) {
-      const [nombrePart, ...apellidoPart] = staff.nombre.split(' ');
-      setNombre(nombrePart ?? '');
-      setApellido(apellidoPart.join(' ') ?? '');
+      setNombre(staff.nombre ?? '');
+      setApellido(staff.apellido ?? '');
+      setNumeroDocumento(staff.numeroDocumento ?? '');
+      setFechaNacimiento(staff.fechaNacimiento ?? '');
+      setNacionalidad(staff.nacionalidad ?? '');
+      setTelefono(staff.telefono ?? '');
+      setEmail(staff.email ?? '');
       setCargo(staff.cargo ?? '');
       setFoto(staff.foto ?? '');
+      setObservaciones(staff.observaciones ?? '');
       setActivo(staff.activo ?? true);
     }
   }, [staff]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            onClose();
+        }
+    };
+    if (open) {
+        window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open, onClose]);
 
   if (!open || !staff) return null;
 
@@ -49,42 +73,77 @@ const EditStaffModal = ({ open, staff, onClose, onSave }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const nombreCompleto = `${nombre} ${apellido}`.trim();
     const updatedStaff = {
       ...staff,
-      nombre: nombreCompleto,
+      nombre,
+      apellido,
+      numeroDocumento,
+      fechaNacimiento,
+      nacionalidad,
+      telefono,
+      email,
       cargo,
       foto,
+      observaciones,
       activo,
     };
-    await onSave(staff.cod, updatedStaff as Staff);
-    onClose();
+    onSave(staff.cod, updatedStaff as Staff);
   };
 
+  const isFormInvalid = !nombre.trim() || !apellido.trim() || !cargo.trim();
+
   return (
-    <div className={styles.darkOverlay}>
-      <div className={styles.darkModal}>
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <button className={styles.closeIcon} onClick={onClose}>
           <MdClose size={28} />
         </button>
-        <h3 className={styles.darkTitle}>Editar staff</h3>
-        <form className={styles.darkForm} onSubmit={handleSubmit}>
+        <h3 className={styles.title}>Editar staff</h3>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.row}>
             <div className={styles.field}>
-              <label>Nombre</label>
+              <label>Nombre <span className={styles.required}>*</span></label>
               <input value={nombre} onChange={e => setNombre(e.target.value)} required />
             </div>
             <div className={styles.field}>
-              <label>Apellido</label>
+              <label>Apellido <span className={styles.required}>*</span></label>
               <input value={apellido} onChange={e => setApellido(e.target.value)} required />
             </div>
           </div>
+
           <div className={styles.row}>
             <div className={styles.field}>
-              <label>Cargo</label>
-              <input value={cargo} onChange={e => setCargo(e.target.value)} required />
+              <label>Nro de Documento</label>
+              <input value={numeroDocumento} onChange={(e) => setNumeroDocumento(e.target.value)} />
+            </div>
+            <div className={styles.field}>
+              <label>Fecha de Nacimiento</label>
+              <input type="date" value={fechaNacimiento} onChange={(e) => setFechaNacimiento(e.target.value)} />
             </div>
           </div>
+
+          <div className={styles.row}>
+            <div className={styles.field}>
+              <label>Nacionalidad</label>
+              <input value={nacionalidad} onChange={(e) => setNacionalidad(e.target.value)} />
+            </div>
+            <div className={styles.field}>
+              <label>Teléfono</label>
+              <input type="tel" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+            </div>
+          </div>
+
+          <div className={styles.row}>
+            <div className={styles.field}>
+              <label>Cargo <span className={styles.required}>*</span></label>
+              <input value={cargo} onChange={e => setCargo(e.target.value)} required />
+            </div>
+            <div className={styles.field}>
+              <label>Email</label>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </div>
+          </div>
+          <textarea className={styles.textarea} placeholder="Observaciones" value={observaciones} onChange={(e) => setObservaciones(e.target.value)} />
           <div className={styles.row}>
             <div className={styles.fotoField}>
               <label htmlFor="fotoStaffInputEdit" className={styles.fotoLabel}>
@@ -101,12 +160,20 @@ const EditStaffModal = ({ open, staff, onClose, onSave }: Props) => {
               {foto && !uploading && <img src={foto} alt="Vista previa" className={styles.fotoPreview} />}
             </div>
           </div>
-          <div className={styles.field}>
-            <label style={{ flexDirection: 'row', alignItems: 'center' }}>Activo <input type="checkbox" checked={activo} onChange={e => setActivo(e.target.checked)} style={{ width: 'auto', marginLeft: '1rem' }} /></label>
+          <div className={styles.switchField}>
+            <label>
+              <input type="checkbox" checked={activo} onChange={e => setActivo(e.target.checked)} />
+              Activo
+            </label>
           </div>
-          <button type="submit" className={styles.darkBtn} disabled={uploading}>
-            {uploading ? 'Guardando...' : 'Guardar'}
-          </button>
+          <div className={styles.actions}>
+            <button type="button" className={styles.cancelBtn} onClick={onClose}>
+              Cancelar
+            </button>
+            <button type="submit" className={styles.saveBtn} disabled={uploading || isFormInvalid}>
+              {uploading ? 'Guardando...' : 'Guardar'}
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -93,9 +93,9 @@ const CategoriasScreen = () => {
             <tbody>
               {categoriasList.filter(cat => cat.activo).map(categoria => (
                 <tr key={categoria.cod}>
-                  <td>{categoria.nombre}</td>
-                  <td>{categoria.descripcionCorta}</td>
-                  <td>
+                  <td data-label="Nombre">{categoria.nombre}</td>
+                  <td data-label="Descripción">{categoria.descripcionCorta}</td>
+                  <td data-label="Color">
                     <span
                       className={styles.categoriaBadge}
                       style={{
@@ -106,7 +106,7 @@ const CategoriasScreen = () => {
                       {categoria.nombre}
                     </span>
                   </td>
-                  <td className={styles.actionsCell}>
+                  <td data-label="Acciones" className={styles.actionsCell}>
                     <div className={styles.buttonGroup}>
                       <button
                         className={`${styles.iconButton} ${styles.viewBtn}`}

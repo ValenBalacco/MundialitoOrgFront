@@ -16,7 +16,7 @@
   background: linear-gradient(145deg, #ffffff 0%, #f9fafb 100%);
   border-radius: 20px;
   padding: 2.5rem;
-  width: 600px;
+  width: 900px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
@@ -85,6 +85,11 @@
   color: #000000; /* etiquetas negras */
   font-size: 0.95rem;
   margin-bottom: 0.35rem;
+}
+
+.field label .required {
+  color: #e53e3e;
+  margin-left: 4px;
 }
 
 .field input,
@@ -161,6 +166,29 @@
   transform: scale(1.03);
 }
 
+/* ================= TEXTAREA ================= */
+.textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #000000;
+  transition: all 0.2s ease;
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  color: #000000;
+}
+
 /* ================= BUTTONS ================= */
 .actions {
   display: flex;
@@ -199,6 +227,14 @@
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
   box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
   transform: translateY(-2px);
+}
+
+.saveBtn:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 /* ================= CHECKBOX ================= */
@@ -242,7 +278,7 @@
 /* ================= RESPONSIVE ================= */
 @media (max-width: 600px) {
   .modal {
-    width: 95%;
+    width: 98%;
     padding: 1.8rem;
   }
 

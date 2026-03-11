@@ -32,6 +32,18 @@ const GestionarPartidosModal = ({ open, onClose, evento, onPartidosChanged }: Pr
         }
     }, [open, evento]);
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                onClose();
+            }
+        };
+        if (open) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [open, onClose]);
+
     const handleDelete = async (id: number) => {
         const result = await Swal.fire({
             title: '¿Eliminar partido?',
@@ -142,8 +154,8 @@ const GestionarPartidosModal = ({ open, onClose, evento, onPartidosChanged }: Pr
 
     return (
         <>
-            <div className={styles.darkOverlay}>
-                <div className={styles.darkModal}>
+            <div className={styles.darkOverlay} onClick={onClose}>
+                <div className={styles.darkModal} onClick={(e) => e.stopPropagation()}>
                     <div className={styles.modalHeader}>
                         <h3 className={styles.darkTitle}>Gestionar Partidos del Evento: {evento.nombre}</h3>
                         <div className={styles.headerActions}>
@@ -173,7 +185,8 @@ const GestionarPartidosModal = ({ open, onClose, evento, onPartidosChanged }: Pr
                                 </tr>
                             </thead>
                             <tbody>
-                                {encuentros.map(encuentro => (
+                                {encuentros.length > 0 ? (
+                                encuentros.map(encuentro => (
                                     <tr key={encuentro.id}>
                                         <td>
                                             <div className={styles.clubInfo}>
@@ -202,7 +215,12 @@ const GestionarPartidosModal = ({ open, onClose, evento, onPartidosChanged }: Pr
                                             </div>
                                         </td>
                                     </tr>
-                                ))}
+                                ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan={7} style={{ textAlign: 'center', padding: '1rem' }}>No se encontraron partidos generados.</td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

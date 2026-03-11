@@ -171,24 +171,30 @@ const VerMiEventoScreen = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {teamStats.map(stat => (
+                                        {teamStats.length > 0 ? (
+                                        teamStats.map(stat => (
                                             <tr key={stat.club.cod}>
-                                                <td>{stat.pos}</td>
-                                                <td>
+                                                <td data-label="Pos">{stat.pos}</td>
+                                                <td data-label="Club">
                                                     <div className={styles.clubInfo}>
                                                         {stat.club.escudo && <img src={stat.club.escudo} alt={`Escudo de ${stat.club.nombre}`} className={styles.escudoSmall} />}
                                                         {stat.club.nombre}
                                                     </div>
                                                 </td>
-                                                <td>{stat.puntos}</td>
-                                                <td>{stat.jugados}</td>
-                                                <td>{stat.ganados}</td>
-                                                <td>{stat.empatados}</td>
-                                                <td>{stat.perdidos}</td>
-                                                <td>{stat.golesFavor}</td>
-                                                <td>{stat.golesContra}</td>
+                                                <td data-label="Pts">{stat.puntos}</td>
+                                                <td data-label="PJ">{stat.jugados}</td>
+                                                <td data-label="PG">{stat.ganados}</td>
+                                                <td data-label="PE">{stat.empatados}</td>
+                                                <td data-label="PP">{stat.perdidos}</td>
+                                                <td data-label="GF">{stat.golesFavor}</td>
+                                                <td data-label="GC">{stat.golesContra}</td>
                                             </tr>
-                                        ))}
+                                        ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan={9} style={{ textAlign: 'center', padding: '1rem' }}>No hay estadísticas disponibles.</td>
+                                            </tr>
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
@@ -216,24 +222,30 @@ const VerMiEventoScreen = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {misPartidosPorDisputar.map(encuentro => (
+                                        {misPartidosPorDisputar.length > 0 ? (
+                                        misPartidosPorDisputar.map(encuentro => (
                                             <tr key={encuentro.id}>
-                                                <td>
+                                                <td data-label="Club Local">
                                                     <div className={styles.clubInfo}>
                                                         {encuentro.clubLocal.escudo && <img src={encuentro.clubLocal.escudo} alt={`Escudo de ${encuentro.clubLocal.nombre}`} className={styles.escudoSmall} />}
                                                         {encuentro.clubLocal.nombre}
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td data-label="Club Visitante">
                                                     <div className={styles.clubInfo}>
                                                         {encuentro.clubVisitante.escudo && <img src={encuentro.clubVisitante.escudo} alt={`Escudo de ${encuentro.clubVisitante.nombre}`} className={styles.escudoSmall} />}
                                                         {encuentro.clubVisitante.nombre}
                                                     </div>
                                                 </td>
-                                                <td>{new Date(encuentro.fecha).toLocaleString()}</td>
-                                                <td>{encuentro.fase}</td>
+                                                <td data-label="Fecha">{new Date(encuentro.fecha).toLocaleString()}</td>
+                                                <td data-label="Fase">{encuentro.fase}</td>
                                             </tr>
-                                        ))}
+                                        ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan={4} style={{ textAlign: 'center', padding: '1rem' }}>No hay partidos próximos.</td>
+                                            </tr>
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
@@ -255,25 +267,31 @@ const VerMiEventoScreen = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {misPartidosDisputados.map(encuentro => (
+                                        {misPartidosDisputados.length > 0 ? (
+                                        misPartidosDisputados.map(encuentro => (
                                             <tr key={encuentro.id}>
-                                                <td>
+                                                <td data-label="Club Local">
                                                     <div className={styles.clubInfo}>
                                                         {encuentro.clubLocal.escudo && <img src={encuentro.clubLocal.escudo} alt={`Escudo de ${encuentro.clubLocal.nombre}`} className={styles.escudoSmall} />}
                                                         {encuentro.clubLocal.nombre}
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td data-label="Club Visitante">
                                                     <div className={styles.clubInfo}>
                                                         {encuentro.clubVisitante.escudo && <img src={encuentro.clubVisitante.escudo} alt={`Escudo de ${encuentro.clubVisitante.nombre}`} className={styles.escudoSmall} />}
                                                         {encuentro.clubVisitante.nombre}
                                                     </div>
                                                 </td>
-                                                <td>{new Date(encuentro.fecha).toLocaleString()}</td>
-                                                <td>{encuentro.resultado}</td>
-                                                <td>{encuentro.fase}</td>
+                                                <td data-label="Fecha">{new Date(encuentro.fecha).toLocaleString()}</td>
+                                                <td data-label="Resultado">{encuentro.resultado}</td>
+                                                <td data-label="Fase">{encuentro.fase}</td>
                                             </tr>
-                                        ))}
+                                        ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan={5} style={{ textAlign: 'center', padding: '1rem' }}>No hay partidos disputados.</td>
+                                            </tr>
+                                        )}
                                     </tbody>
                                 </table>
                             </div>
@@ -296,26 +314,32 @@ const VerMiEventoScreen = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {encuentros.map(encuentro => (
+                                        {encuentros.length > 0 ? (
+                                        encuentros.map(encuentro => (
                                             <tr key={encuentro.id}>
-                                                <td>
+                                                <td data-label="Club Local">
                                                     <div className={styles.clubInfo}>
                                                         {encuentro.clubLocal.escudo && <img src={encuentro.clubLocal.escudo} alt={`Escudo de ${encuentro.clubLocal.nombre}`} className={styles.escudoSmall} />}
                                                         {encuentro.clubLocal.nombre}
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td data-label="Club Visitante">
                                                     <div className={styles.clubInfo}>
                                                         {encuentro.clubVisitante.escudo && <img src={encuentro.clubVisitante.escudo} alt={`Escudo de ${encuentro.clubVisitante.nombre}`} className={styles.escudoSmall} />}
                                                         {encuentro.clubVisitante.nombre}
                                                     </div>
                                                 </td>
-                                                <td>{new Date(encuentro.fecha).toLocaleString()}</td>
-                                                <td>{encuentro.resultado}</td>
-                                                <td>{encuentro.estado}</td>
-                                                <td>{encuentro.fase}</td>
+                                                <td data-label="Fecha">{new Date(encuentro.fecha).toLocaleString()}</td>
+                                                <td data-label="Resultado">{encuentro.resultado}</td>
+                                                <td data-label="Estado">{encuentro.estado}</td>
+                                                <td data-label="Fase">{encuentro.fase}</td>
                                             </tr>
-                                        ))}
+                                        ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan={6} style={{ textAlign: 'center', padding: '1rem' }}>No se encontraron partidos.</td>
+                                            </tr>
+                                        )}
                                     </tbody>
                                 </table>
                             </div>

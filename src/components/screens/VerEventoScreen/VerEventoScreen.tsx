@@ -62,6 +62,18 @@ const VerEventoScreen = () => {
         setSelectedEquipoModal(null);
     };
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && selectedEquipoModal) {
+                handleCloseEquipoModal();
+            }
+        };
+        if (selectedEquipoModal) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedEquipoModal]);
+
     const fetchEventoDetails = async () => {
         if (id) {
             try {
@@ -316,20 +328,20 @@ const VerEventoScreen = () => {
                                 <tbody>
                                     {teamStats.map(stat => (
                                         <tr key={stat.club.cod}>
-                                            <td>{stat.pos}</td>
-                                            <td>
+                                            <td data-label="Pos">{stat.pos}</td>
+                                            <td data-label="Club">
                                                 <div className={styles.clubInfo}>
                                                     {stat.club.escudo && <img src={stat.club.escudo} alt={`Escudo de ${stat.club.nombre}`} className={styles.escudoSmall} />}
                                                     {stat.club.nombre}
                                                 </div>
                                             </td>
-                                            <td>{stat.puntos}</td>
-                                            <td>{stat.jugados}</td>
-                                            <td>{stat.ganados}</td>
-                                            <td>{stat.empatados}</td>
-                                            <td>{stat.perdidos}</td>
-                                            <td>{stat.golesFavor}</td>
-                                            <td>{stat.golesContra}</td>
+                                            <td data-label="Pts">{stat.puntos}</td>
+                                            <td data-label="PJ">{stat.jugados}</td>
+                                            <td data-label="PG">{stat.ganados}</td>
+                                            <td data-label="PE">{stat.empatados}</td>
+                                            <td data-label="PP">{stat.perdidos}</td>
+                                            <td data-label="GF">{stat.golesFavor}</td>
+                                            <td data-label="GC">{stat.golesContra}</td>
                                         </tr>
                                     ))}
                                 </tbody>

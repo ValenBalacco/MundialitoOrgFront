@@ -126,7 +126,7 @@ const EquiposScreen = () => {
                 .filter(eq => eq && eq.activo)
                 .map((equipo) => (
                   <tr key={equipo.cod}>
-                    <td>
+                    <td data-label="Nombre">
                       <div className={styles.equipoInfo}>
                         <span className={styles.equipoNombre}>{equipo.nombreEquipo}</span>
                         {equipo.categoria && (
@@ -142,7 +142,7 @@ const EquiposScreen = () => {
                         )}
                       </div>
                     </td>
-                    <td>
+                    <td data-label="Acciones">
                       <div className={styles.buttonGroup}>
                         <button className={`${styles.iconButton} ${styles.deleteBtn}`} title="Eliminar" onClick={() => handleDelete(equipo)}>
                           <FaTrash />
@@ -278,7 +278,7 @@ const EquiposScreen = () => {
           open={openJugadorModal}
           onClose={() => setOpenJugadorModal(false)}
           title="Selecciona jugadores"
-          items={jugadoresList.map(j => ({ id: j.cod, nombre: [j.nombre, j.apellido].filter(Boolean).join(' ') }))}
+          items={jugadoresList.map(j => ({ id: j.cod, nombre: [j.nombre, j.apellido].filter(Boolean).join(' '), foto: j.foto }))}
           existingIds={equipoSeleccionado?.jugadores?.map(j => j.cod) ?? []}
           onSave={async (newIds) => {
             if (equipoSeleccionado) {
@@ -307,7 +307,7 @@ const EquiposScreen = () => {
           open={openStaffModal}
           onClose={() => setOpenStaffModal(false)}
           title="Selecciona staff"
-          items={staffList.map(s => ({ id: s.cod, nombre: [s.nombre, s.apellido].filter(Boolean).join(' ') }))}
+          items={staffList.map(s => ({ id: s.cod, nombre: [s.nombre, s.apellido].filter(Boolean).join(' '), foto: s.foto }))}
           existingIds={equipoSeleccionado?.staff?.map(s => s.cod) ?? []}
           onSave={async (newIds) => {
             if (equipoSeleccionado) {

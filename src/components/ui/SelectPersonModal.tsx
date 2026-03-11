@@ -5,6 +5,7 @@ import { MdAdd, MdDelete } from 'react-icons/md';
 interface Item {
   id: number;
   nombre?: string;
+  foto?: string;
 }
 
 interface Props {
@@ -34,7 +35,14 @@ const SelectPersonModal = ({ open, onClose, title, items, existingIds, onSave }:
         <div className={styles.list}>
           {items.map(item => (
             <div key={item.id} className={styles.listItem}>
-              <span>{item.nombre || "Sin nombre"}</span>
+              <div className={styles.itemInfo}>
+                {item.foto ? (
+                  <img src={item.foto} alt={item.nombre} className={styles.itemPhoto} />
+                ) : (
+                  <div className={styles.itemPhotoPlaceholder} />
+                )}
+                <span>{item.nombre || "Sin nombre"}</span>
+              </div>
               {currentIds.includes(item.id) ? (
                 <div className={styles.itemActions}>
                   <span className={styles.inTeamLabel}>En el Equipo</span>

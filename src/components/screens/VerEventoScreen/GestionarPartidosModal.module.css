@@ -171,3 +171,73 @@
     background-color: #e9ecef;
     transform: translateY(-2px);
   }
+
+@media (max-width: 768px) {
+    .darkModal {
+        width: 95%;
+        padding: 1.5rem;
+        max-height: 95vh;
+    }
+
+    .modalHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .darkTitle {
+        font-size: 1.5rem;
+    }
+
+    .headerActions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .createBtn, .generateBtn {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .eventTable thead {
+        display: none;
+    }
+
+    .eventTable tr {
+        display: block;
+        margin-bottom: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        padding: 1rem;
+    }
+
+    .eventTable td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #edf2f7;
+        text-align: right;
+    }
+    
+    .eventTable td:last-child {
+        border-bottom: none;
+    }
+
+    .eventTable td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #4a5568;
+        margin-right: 1rem;
+        text-align: left;
+    }
+    
+    .footer {
+        justify-content: center;
+    }
+
+    .backBtn {
+        width: 100%;
+        justify-content: center;
+    }
+}

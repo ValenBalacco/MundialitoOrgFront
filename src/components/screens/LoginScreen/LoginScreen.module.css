@@ -156,7 +156,135 @@
 }
 
 .error {
+
   color: red;
+
   margin-top: 1rem;
+
   text-align: center;
+
+}
+
+
+
+@media (max-width: 768px) {
+
+  .wrapper {
+
+    align-items: flex-start;
+
+    padding-top: 4rem;
+
+  }
+
+  
+
+  .loginBox {
+
+    flex-direction: column;
+
+    width: 90%;
+
+    max-width: 450px;
+
+    min-height: 0;
+
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+
+  }
+
+
+
+  .imageContainer {
+
+    flex: 0 0 200px; /* Altura fija para la imagen en tablets */
+
+  }
+
+
+
+  .welcomeTitle {
+
+    font-size: 2rem;
+
+  }
+
+
+
+  .welcomeText {
+
+    font-size: 1rem;
+
+  }
+
+
+
+  .formContainer {
+
+    padding: 2rem;
+
+  }
+
+
+
+  .title {
+
+    font-size: 1.8rem;
+
+    margin-bottom: 1.5rem;
+
+  }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+    .wrapper {
+
+        padding: 1rem;
+
+        align-items: center;
+
+    }
+
+  .loginBox {
+
+    width: 100%;
+
+  }
+
+
+
+  .imageContainer {
+
+    display: none; /* Ocultar imagen en móviles */
+
+  }
+
+
+
+  .formContainer {
+
+    padding: 2rem 1.5rem;
+
+  }
+
+
+
+  .title {
+
+      font-size: 1.6rem;
+
+  }
+
+
+
+  .input {
+
+      padding: 0.8rem 1rem 0.8rem 2.8rem;
+
+  }
+
 }

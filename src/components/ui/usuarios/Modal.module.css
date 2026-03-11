@@ -437,3 +437,47 @@ button[type="button"]:hover {
   background: #e2e8f0;
   transform: translateY(-1px);
 }
+
+@media (max-width: 768px) {
+  .modal,
+  .darkModal {
+    width: 90vw;
+    padding: 2rem;
+  }
+
+  .clubDetailsView {
+    grid-template-columns: 1fr;
+  }
+  
+  .createModal {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal,
+  .darkModal {
+    padding: 1.5rem;
+  }
+
+  .modal h3,
+  .darkModal h3,
+  .darkTitle {
+    font-size: 1.5rem;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .createBtn {
+    margin-right: 0;
+  }
+}
+

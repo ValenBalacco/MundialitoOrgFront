@@ -29,6 +29,18 @@ const CreateEditEventoModal = ({ open, onClose, onSave, evento, isEditMode }: Cr
     }
   }, [evento, isEditMode, open]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+            onClose();
+        }
+    };
+    if (open) {
+        window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open, onClose]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -53,18 +65,18 @@ const CreateEditEventoModal = ({ open, onClose, onSave, evento, isEditMode }: Cr
   if (!open) return null;
 
   return (
-    <div className={styles.overlay}>
-        <div className={styles.modal}>
+    <div className={styles.overlay} onClick={onClose}>
+        <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <form onSubmit={handleSubmit} className={styles.form}>
-            <h3 className={styles.title}>{isEditMode ? 'Editar Evento' : 'Crear Nuevo Evento'}</h3>
+            <h3 className={styles.title}>{isEditMode ? 'Editar Evento' : 'Crear Nuevo Evento'}</h3> 
                 <div className={styles.formGroup} style={{ flexBasis: '100%' }}>
-                <label htmlFor="nombre">Nombre del Evento</label>
+                <label htmlFor="nombre">Nombre del Evento <span className={styles.required}>*</span></label>
                 <input
                     id="nombre"
                     type="text"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
-                    placeholder="Ej. Mundialito 2024"
+                    placeholder="Ej. Mundialito 2026"
                     required
                 />
                 </div>
@@ -85,8 +97,8 @@ const CreateEditEventoModal = ({ open, onClose, onSave, evento, isEditMode }: Cr
                     </select>
                     </div>
                 </div>
-                <div className={styles.buttonGroup}>
-                <button type="submit" className={styles.saveBtn}>
+                <div className={styles.buttonGroup}> 
+                <button type="submit" className={styles.saveBtn} disabled={!nombre.trim()}>
                     <MdSave size={20} />
                     {isEditMode ? 'Guardar Cambios' : 'Crear Evento'}
                 </button>

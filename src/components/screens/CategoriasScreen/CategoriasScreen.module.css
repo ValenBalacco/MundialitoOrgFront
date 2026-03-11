@@ -243,15 +243,83 @@
 /* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {
   .panelContainer {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
+    margin-left: 0;
+    padding-bottom: 80px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .panelTitle {
+    font-size: 2.2rem;
   }
 
   .createBtn {
-    padding: 0.8rem 1.2rem;
-    font-size: 1rem;
+    width: 100%;
+    justify-content: center;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+  }
+
+  .tableContainer {
+    overflow-x: auto;
+  }
+
+  .categoriaTable thead {
+    display: none;
+  }
+
+  .categoriaTable tr {
+    display: block;
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    padding: 1.2rem;
+  }
+
+  .categoriaTable td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #edf2f7;
+    text-align: right;
+    width: 100%;
+  }
+
+  .categoriaTable td:last-child {
+    border-bottom: none;
+  }
+
+  .categoriaTable td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #4a5568;
+    margin-right: 1rem;
+    text-align: left;
+  }
+
+  .buttonGroup {
+    justify-content: flex-end;
+  }
+  
+  .carnetModal {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  
+  .modalHeader h2 {
+    font-size: 1.6rem;
   }
 
   .modalDatosGrid {
     grid-template-columns: 1fr;
+    gap: 0.8rem;
   }
 }

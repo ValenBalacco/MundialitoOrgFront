@@ -40,6 +40,18 @@ const CreateEditPartidoModal = ({ open, onClose, onSaved, evento, partido }: Pro
         }
     }, [partido, open]);
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                onClose();
+            }
+        };
+        if (open) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [open, onClose]);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!clubLocalId || !clubVisitanteId) {
@@ -91,14 +103,16 @@ const CreateEditPartidoModal = ({ open, onClose, onSaved, evento, partido }: Pro
     
     if (!open) return null;
 
+    const isFormInvalid = !clubLocalId || !clubVisitanteId || !fecha || !fase;
+
     return (
-        <div className={styles.darkOverlay}>
-            <div className={styles.darkModal}>
+        <div className={styles.darkOverlay} onClick={onClose}>
+            <div className={styles.darkModal} onClick={(e) => e.stopPropagation()}>
                 <button className={styles.closeIcon} onClick={onClose}>&times;</button>
                 <h2>{partido ? 'Editar Partido' : 'Crear Partido'}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.formGroup}>
-                        <label>Club Local</label>
+                        <label>Club Local <span className={styles.required}>*</span></label>
                         <select value={clubLocalId} onChange={e => setClubLocalId(Number(e.target.value))} required>
                             <option value="">Seleccione un club</option>
                             {availableClubs.map(club => (
@@ -107,7 +121,7 @@ const CreateEditPartidoModal = ({ open, onClose, onSaved, evento, partido }: Pro
                         </select>
                     </div>
                     <div className={styles.formGroup}>
-                        <label>Club Visitante</label>
+                        <label>Club Visitante <span className={styles.required}>*</span></label>
                         <select value={clubVisitanteId} onChange={e => setClubVisitanteId(Number(e.target.value))} required>
                             <option value="">Seleccione un club</option>
                             {availableClubs.map(club => (
@@ -116,11 +130,11 @@ const CreateEditPartidoModal = ({ open, onClose, onSaved, evento, partido }: Pro
                         </select>
                     </div>
                     <div className={styles.formGroup}>
-                        <label>Fecha y Hora</label>
+                        <label>Fecha y Hora <span className={styles.required}>*</span></label>
                         <input type="datetime-local" value={fecha} onChange={e => setFecha(e.target.value)} required />
                     </div>
                     <div className={styles.formGroup}>
-                        <label>Fase</label>
+                        <label>Fase <span className={styles.required}>*</span></label>
                         <input type="number" value={fase} onChange={e => setFase(Number(e.target.value))} min="1" required />
                     </div>
                     <div className={styles.formGroup}>
@@ -135,7 +149,7 @@ const CreateEditPartidoModal = ({ open, onClose, onSaved, evento, partido }: Pro
                         <input type="text" value={resultado} onChange={e => setResultado(e.target.value)} disabled={estado === 'POR_DISPUTAR'} />
                     </div>
                     <div className={styles.buttonGroup}>
-                        <button type="submit" className={styles.saveBtn}>Guardar</button>
+                        <button type="submit" className={styles.saveBtn} disabled={isFormInvalid}>Guardar</button>
                     </div>
                 </form>
             </div>

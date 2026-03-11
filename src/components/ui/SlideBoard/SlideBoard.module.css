@@ -77,3 +77,44 @@
   .backBtn {
     margin-top: auto;
   }
+  
+  @media (max-width: 768px) {
+    .slideBoard {
+      width: 100%;
+      height: 60px;
+      flex-direction: row;
+      justify-content: space-around;
+      padding: 0;
+      bottom: 0;
+      top: auto;
+      border-top: 1px solid #2d3748;
+    }
+  
+    .slideBoard:hover {
+      width: 100%;
+    }
+  
+    .slideBoard button {
+      margin: 0;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      width: auto;
+      padding: 0.5rem;
+    }
+  
+    .slideBoard button span:last-child {
+      display: none; /* Hide text on mobile */
+    }
+  
+    .active::before {
+      width: 100%;
+      height: 4px;
+      top: 0;
+      border-radius: 0;
+    }
+  
+    .backBtn {
+      margin-top: 0;
+    }
+  }

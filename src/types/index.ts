@@ -47,24 +47,39 @@ export interface Jugador {
     nombre: string;
     apellido: string;
     fechaNacimiento: string; // ISO string
+    lugarNacimiento: string;
+    nacionalidad: string;
     numeroDocumento: string;
+    telefono: string;
+    email: string;
     numeroCamiseta: number;
     demarcacion: string;
+    altura: number;
+    peso: number;
+    pieDominante: string;
     goles: number;
     amarilla: number;
     tarjetaRoja: number;
     foto: string;
+    observaciones: string;
     activo: boolean;
     equipo?: Equipos;
     categoria?: Categoria;
+    club?: Clubes;
 }
 
 export interface Staff {
     cod: number;
     nombre: string;
     apellido: string;
+    numeroDocumento: string;
+    fechaNacimiento: string;
+    nacionalidad: string;
+    telefono: string;
+    email: string;
     cargo: string;
     foto: string;
+    observaciones: string;
     activo: boolean;
     club?: Clubes;
     equipo?: Equipos;

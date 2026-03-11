@@ -297,3 +297,32 @@ button[type="button"]:hover {
   from { transform: scale(0.95); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+@media (max-width: 768px) {
+  .modal,
+  .darkModal {
+    width: 90vw;
+    padding: 2rem;
+  }
+
+  .clubDetailsView {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal,
+  .darkModal {
+    padding: 1.5rem;
+  }
+
+  .modal h3,
+  .darkModal h3 {
+    font-size: 1.5rem;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

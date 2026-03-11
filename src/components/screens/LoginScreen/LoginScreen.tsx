@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login, getUsuarioByUsername } from '../../../api/usuarioService';
 import styles from './LoginScreen.module.css';
 import Swal from 'sweetalert2';
@@ -11,6 +12,7 @@ const LoginScreen = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -29,6 +31,9 @@ const LoginScreen = () => {
                 localStorage.setItem('token', token);
                 const usuario = await getUsuarioByUsername(username);
                 localStorage.setItem('username', username);
+                if (usuario?.rol) {
+                    localStorage.setItem('rol', usuario.rol);
+                }
                 if (usuario?.club?.nombre) {
                     localStorage.setItem('club', usuario.club.nombre);
                     localStorage.setItem('clubId', usuario.club.cod.toString());
@@ -37,9 +42,9 @@ const LoginScreen = () => {
                     localStorage.removeItem('clubId');
                 }
                 if (usuario?.rol === 'ADMIN') {
-                    window.location.href = '/admin';
+                    navigate('/admin');
                 } else if (usuario?.rol === 'CLUB') {
-                    window.location.href = '/club';
+                    navigate('/club');
                 } else {
                     MySwal.fire({
                         icon: 'error',
@@ -63,14 +68,14 @@ const LoginScreen = () => {
             setLoading(false);
         }
     };
-
+    
     return (
         <div className={styles.wrapper}>
             <div className={styles.loginBox}>
                 <div className={styles.imageContainer}>
                     <img src="/assets/login-bg.png" alt="Mundialito" className={styles.image} />
                     <div className={styles.imageOverlay}>
-                        <h1 className={styles.welcomeTitle}>Gestor de Clubes</h1>
+                        <h1 className={styles.welcomeTitle}>Gestor de Clubes MundialitoOrg</h1>
                         <p className={styles.welcomeText}>Gestión de Torneos</p>
                     </div>
                 </div>

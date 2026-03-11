@@ -26,6 +26,7 @@ export interface Evento {
   tipo: 'LLAVES' | 'PUNTOS';
   ordenEncuentros: 'AZAR' | 'MANUAL';
   fases: number;
+  activo: boolean;
   clubes?: Clubes[];
   equipos?: any[]; // Define Equipo type if available
 }
@@ -77,6 +78,11 @@ export const updateEvento = async (id: number, evento: Partial<Evento>): Promise
 
 export const deleteEvento = async (id: number): Promise<void> => {
   await axiosAuth.delete(`${API_URL}/${id}`);
+};
+
+export const setEventoActivo = async (id: number, activo: boolean): Promise<Evento> => {
+  const response = await axiosAuth.put(`${API_URL}/${id}/activo?activo=${activo}`, {});
+  return response.data;
 };
 
 export const addClubToEvento = async (eventoId: number, clubId: number): Promise<void> => {
