@@ -1,4 +1,3 @@
-
 import { Clubes, Encuentro } from '../types';
 
 export interface BracketMatch {
@@ -17,7 +16,7 @@ export const getWinner = (encuentro: Encuentro): Clubes | null => {
     const [score1, score2] = encuentro.resultado.split('-').map(Number);
     if (score1 > score2) return encuentro.clubLocal;
     if (score2 > score1) return encuentro.clubVisitante;
-    return null; // Should handle draws/penalties if applicable
+    return null;
 };
 
 export const generateBracket = (clubes: Clubes[], encuentros: Encuentro[]): BracketRound[] => {
@@ -27,7 +26,6 @@ export const generateBracket = (clubes: Clubes[], encuentros: Encuentro[]): Brac
     let currentRoundMatches = encuentros.filter(e => e.fase === 1);
     let roundNumber = 1;
 
-    // Initial round
     rounds.push({
         title: `Ronda ${roundNumber}`,
         matches: currentRoundMatches.map(e => ({
@@ -66,7 +64,7 @@ export const generateBracket = (clubes: Clubes[], encuentros: Encuentro[]): Brac
                     winner: getWinner(existingEncuentro)?.nombre
                 });
             } else {
-                 nextRoundMatches.push({
+                nextRoundMatches.push({
                     id: `r${roundNumber}-m${i/2}`,
                     teams: [
                         team1 ? { name: team1.nombre } : null,
@@ -84,9 +82,7 @@ export const generateBracket = (clubes: Clubes[], encuentros: Encuentro[]): Brac
         currentRoundMatches = encuentros.filter(e => e.fase === roundNumber);
         winners = currentRoundMatches.map(getWinner);
         
-        // Break if no more winners to process
         if (winners.filter(w => w !== null).length < 2 && nextRoundMatches.every(m => m.teams.filter(t => t).length < 2)) {
-            // Check if there is a final winner
             if(nextRoundMatches.length === 1 && nextRoundMatches[0].winner) {
                  rounds.push({
                     title: 'Ganador',

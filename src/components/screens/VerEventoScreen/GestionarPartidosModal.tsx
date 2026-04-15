@@ -120,7 +120,7 @@ const GestionarPartidosModal = ({ open, onClose, evento, onPartidosChanged }: Pr
                 }
             }
         } else if (evento.tipo === 'LLAVES') {
-            // Shuffle clubes
+        
             for (let i = clubes.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [clubes[i], clubes[j]] = [clubes[j], clubes[i]];
